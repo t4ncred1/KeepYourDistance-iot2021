@@ -23,6 +23,19 @@ module keepDistanceC {
 } implementation {
     uint8_t rec_id;
     message_t packet;
+    uint8_t counters[MAX_NODES];
+    uint8_t i;
+
+    void debug_message(bool sent, msg_t* mess){
+        dbg("radio_pack","The following message was correctly %s at time %s\n", (sent ? "sent" : "received"), sim_time_string());
+        dbg_clear("radio_pack","\tid: %hhu \n", mess->id);
+        if(sent){// FIXME: only display these informations when we have a receive, not a send, and make sure it's after the counter was increased.
+            dbg_clear("radio_pack","\tThe counters are:\n");
+            for(i=0; i<MAX_NODES; i++){
+                dbg_clear("radio_pack","\t\t%u : %hhu\n", i+1, counters[i]);
+            }
+        }
+    }
 
     event void Boot.booted(){
         dbg("boot","Application booted.\n");
