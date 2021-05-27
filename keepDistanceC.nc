@@ -58,12 +58,22 @@ module keepDistanceC {
     }
 
     event void Timer.fired(){
-        //TODO
+        msg_t* mess = (msg_t*) call Packet.getPayload(&packet, sizeof(msg_t));
+        if (mess == NULL){
+            dbg("radio", "Error during the creation of a message\n");
+            return;
+        }
+        mess->id = TOS_NODE_ID;
+
+        if (call AMSend.send(AM_BROADCAST_ADDR, &packet, sizeof(msg_t)) == SUCCESS){
+            debug_message(TRUE, mess);
+        }
     }
 
     event void AMSend.sendDone(message_t* buf, error_t err){
-        if (&packet == buf && err == SUCCESS ){
-           //TODO
+        if (&packet == buf && err == SUCCESS ){ //TODO: we don't want to stop the timer after a send is done
+           call Timer.stop();
+           dbg("timer", "The timer was stopped at time %s\n", sim_time_string());
         } else {
             dbgerror("radio_send", "Failed to send the message.\n");
         }
