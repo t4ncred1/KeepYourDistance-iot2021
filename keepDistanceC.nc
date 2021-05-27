@@ -7,11 +7,13 @@
  */
 
 #include "keepDistance.h"
+#include "Timer.h"
 
 module keepDistanceC {
     uses {
         interface Boot;
         interface SplitControl;
+        interface AMSend;
         interface Receive;
         interface Packet;
         interface Timer<TMilli> as Timer;
@@ -33,7 +35,7 @@ module keepDistanceC {
             call Timer.startPeriodic( PERIOD );
         }
         else {
-            dbgerror("radio", "error while starting the radio, retrying...\n")
+            dbgerror("radio", "error while starting the radio, retrying...\n");
             call SplitControl.start();
         }
     }
@@ -50,12 +52,12 @@ module keepDistanceC {
         if (&packet == buf && err == SUCCESS ){
            //TODO
         } else {
-            dbgerror("radio_send", "Failed to send the message.\n")
+            dbgerror("radio_send", "Failed to send the message.\n");
         }
     }
 
     event message_t* Receive.receive(message_t* buf, void* payload, uint8_t len){
-        if (len != sieof(msg_t)) {return buf;}
+        if (len != sizeof(msg_t)) {return buf;}
         else {
            //TODO
         }
