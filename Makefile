@@ -1,0 +1,3 @@
+COMPONENT=keepDistanceAppC
+include $(MAKERULES)
+
