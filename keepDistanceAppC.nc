@@ -6,6 +6,8 @@
  *  Authors: Tancredi Covioli (C.P.: 10498705); Alessandro Dangelo (C.P.: 10524044)
  */
 
+#define NEW_PRINTF_SEMANTICS
+#include "printf.h"
 #include "keepDistance.h"
 
 configuration keepDistanceAppC{}
@@ -17,6 +19,8 @@ implementation{
     components ActiveMessageC;
     components new AMSenderC(AM_SEND_MSG);
     components new AMReceiverC(AM_SEND_MSG);
+    components PrintfC;
+    components SerialStartC;
 
     App.Boot -> MainC.Boot;
     App.Timer -> timer;

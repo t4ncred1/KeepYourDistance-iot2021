@@ -6,6 +6,7 @@
  *  Authors: Tancredi Covioli (C.P.: 10498705); Alessandro Dangelo (C.P.: 10524044)
  */
 
+#include "printf.h"
 #include "keepDistance.h"
 #include "Timer.h"
 
@@ -28,14 +29,27 @@ module keepDistanceC {
 
     void debug_message(bool sent, msg_t* mess){
         dbg("radio_pack","The following message was correctly %s at time %s\n", (sent ? "sent" : "received"), sim_time_string());
+
+        printf("The following message was correctly %s\n", (sent ? "sent" : "received"));
+        printfflush();
+
         dbg_clear("radio_pack","\tid: %hhu \n", mess->id);
 
+        printf("\tid: %hhu \n", mess->id);
+        printfflush();
 
         if(!sent){
             dbg_clear("radio_pack","\tThe counters are:\n");
+
+            printf("\tThe counters are:\n");
+            printfflush();
+
             for(i=0; i<MAX_NODES; i++){
                 dbg_clear("radio_pack","\t\t%u : %hhu\n", i+1, counters[i]);
+                printf("\t\t%u : %u\n", i+1, counters[i]);
+                printfflush();
             }
+
         }
     }
 
@@ -48,6 +62,8 @@ module keepDistanceC {
 
     event void Boot.booted(){
         dbg("boot","Application booted.\n");
+        printf("boot id: %hu", TOS_NODE_ID); // TODO: DEBUG
+        printfflush();
         call SplitControl.start();
     }
 
