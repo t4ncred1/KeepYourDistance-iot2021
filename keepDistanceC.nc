@@ -23,18 +23,27 @@ module keepDistanceC {
 } implementation {
     uint8_t rec_id;
     message_t packet;
-    uint8_t counters[MAX_NODES];
+    uint16_t counters[MAX_NODES];
     uint8_t i;
 
     void debug_message(bool sent, msg_t* mess){
         dbg("radio_pack","The following message was correctly %s at time %s\n", (sent ? "sent" : "received"), sim_time_string());
         dbg_clear("radio_pack","\tid: %hhu \n", mess->id);
-        if(sent){// FIXME: only display these informations when we have a receive, not a send, and make sure it's after the counter was increased.
+
+
+        if(!sent){
             dbg_clear("radio_pack","\tThe counters are:\n");
             for(i=0; i<MAX_NODES; i++){
                 dbg_clear("radio_pack","\t\t%u : %hhu\n", i+1, counters[i]);
             }
         }
+    }
+
+    void alarm (uint8_t mote1, uint8_t mote2, uint16_t counter){
+        dbg("alarm", "MOTE %hhu AND MOTE %hhu HAVE BEEN NEAR FOR ", mote1, mote2);
+        dbg("alarm", "%hhu MESSAGES\n", counter);
+        printf("alarm!\n");
+        printfflush();
     }
 
     event void Boot.booted(){
@@ -58,6 +67,7 @@ module keepDistanceC {
     }
 
     event void Timer.fired(){
+
         msg_t* mess = (msg_t*) call Packet.getPayload(&packet, sizeof(msg_t));
         if (mess == NULL){
             dbg("radio", "Error during the creation of a message\n");
@@ -71,18 +81,29 @@ module keepDistanceC {
     }
 
     event void AMSend.sendDone(message_t* buf, error_t err){
-        if (&packet == buf && err == SUCCESS ){ //TODO: we don't want to stop the timer after a send is done
-           call Timer.stop();
-           dbg("timer", "The timer was stopped at time %s\n", sim_time_string());
+        if (&packet == buf && err == SUCCESS ){
+            dbg("radio_send", "message sent correctly.\n");
         } else {
             dbgerror("radio_send", "Failed to send the message.\n");
         }
     }
 
     event message_t* Receive.receive(message_t* buf, void* payload, uint8_t len){
-        if (len != sizeof(msg_t)) {return buf;}
-        else {
-           //TODO
+        if (len != sizeof(msg_t)) {
+            dbgerror("radio_rec","received a malformed packet.\n");
+            return buf;
+        } else {
+          msg_t* mess = (msg_t*) payload;
+          if (0 <= mess->id && mess->id < MAX_NODES){
+              counters[mess->id]++;
+              debug_message(FALSE, mess);
+              if (counters[mess->id]%10==0 && counters[mess->id]!=0){
+                  counters[mess->id] = 0;
+                  alarm(TOS_NODE_ID, mess->id, counters[mess->id]);
+              }
+          } else {
+              dbgerror("radio_rec", "received a packet with an invalid ID.");
+          }
         }
     }
 

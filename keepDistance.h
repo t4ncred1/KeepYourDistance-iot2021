@@ -14,7 +14,7 @@ typedef nx_struct msg_struct {
 } msg_t;
 
 enum{
-AM_SEND_MSG = 6,
+   AM_SEND_MSG = 6,
 };
 
 #define PERIOD 500
