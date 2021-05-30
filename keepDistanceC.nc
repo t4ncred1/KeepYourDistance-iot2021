@@ -38,13 +38,15 @@ module keepDistanceC {
 				dbg_clear("radio_pack","\t\t%u : %hhu,%hhu\n", i+1, status[i].msg_num,status[i].msg_start);
 			}
 		//}
+		return;
 	}
 
-	void alarm (uint8_t mote1, uint8_t mote2, uint16_t counter) {
+	void alarm (uint8_t mote1, uint8_t mote2, status_t* status) {
 		dbg("alarm", "MOTE %hhu AND MOTE %hhu HAVE BEEN NEAR FOR ", mote1, mote2);
-		dbg("alarm", "%hhu MESSAGES\n", counter);
-		printf("alarm!\n");
+		dbg("alarm", "%hhu MESSAGES\n", status->msg_num - status->msg_start);
+		printf("ALARM! Received %d messages from %d\n", (status->msg_num - status->msg_start)%256, mote2 );
 		printfflush();
+		return;
 	}
 
 	event void Boot.booted() {
@@ -78,6 +80,8 @@ module keepDistanceC {
 			dbg("radio", "Error during the creation of a message\n");
 			return;
 		}
+		printf("sending new message!\n");
+		printfflush();
 		mess->id = TOS_NODE_ID;
 		mess->counter = counter;
 
@@ -100,6 +104,8 @@ module keepDistanceC {
 			return buf;
 		} else {
 			msg_t* mess = (msg_t*)payload;
+			printf("messaggio ricevuto!\n");
+			printfflush();
 			if (0 <= mess->id && mess->id < MAX_NODES) {
 				debug_message(FALSE, mess);
 				rec_id = mess->id;
@@ -112,12 +118,13 @@ module keepDistanceC {
 					status[rec_id-1].msg_num = mess->counter;
 				}
 				if((status[rec_id-1].msg_num-status[rec_id-1].msg_start)%256 >= 10)
-					alarm(TOS_NODE_ID, mess->id, counters[mess->id]);
+					alarm(TOS_NODE_ID, rec_id, &status[rec_id-1]);
 			}
 			else {
 				dbgerror("radio_rec", "received a packet with an invalid ID.");
 			}
 		}
+		return buf;
 	}
 
 }
