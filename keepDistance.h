@@ -11,7 +11,13 @@
 
 typedef nx_struct msg_struct {
    nx_uint8_t id;
+   nx_uint8_t counter;
 } msg_t;
+
+typedef nx_struct status_struct {
+   nx_uint8_t msg_num;				//numero dell'ultimo messaggio ricevuto
+   nx_uint8_t msg_start;			//numero del primo dei messaggi rievuti in sequenza
+} status_t;
 
 enum{
    AM_SEND_MSG = 6,
