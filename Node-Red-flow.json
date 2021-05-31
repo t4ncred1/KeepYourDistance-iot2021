@@ -1,15 +1,15 @@
 [
     {
-        "id": "b5d1af96.0416f8",
+        "id": "d945cd76.8a4408",
         "type": "tab",
         "label": "Flow 1",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "518afb0c.fd6614",
+        "id": "763c01d1.c697c",
         "type": "tcp in",
-        "z": "b5d1af96.0416f8",
+        "z": "d945cd76.8a4408",
         "name": "",
         "server": "client",
         "host": "localhost",
@@ -23,44 +23,45 @@
         "y": 80,
         "wires": [
             [
-                "40752fa4.50e23"
+                "31e73207.625f16"
             ]
         ]
     },
     {
-        "id": "7cf022d0.d33cf4",
+        "id": "32e3806.8e56c8",
         "type": "debug",
-        "z": "b5d1af96.0416f8",
+        "z": "d945cd76.8a4408",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "payload",
-        "x": 610,
-        "y": 140,
+        "x": 870,
+        "y": 160,
         "wires": []
     },
     {
-        "id": "e3dcbb55.657938",
+        "id": "eec9eecd.7da698",
         "type": "function",
-        "z": "b5d1af96.0416f8",
+        "z": "d945cd76.8a4408",
         "name": "Remove chars coming from the upside down",
-        "func": "const re = /ALARM\\!\\sm\\d*\\s<\\-\\sm\\d*\\,\\sn\\:\\d*/g\nconst num = /\\d+/g\nconst substr = (str,regex) => {\n  return ((str || '').match(regex) || [])\n}\n\nmsg.payload = substr(msg.payload,re)[0];\nvar nums = substr(msg.payload,num);\nnum1 = substr(msg.payload,num)[1];\nnum2 = substr(msg.payload,num)[2];\n\nmsg.payload = 'mote ' + nums[0] + ' has mote ' + nums[1] + ' too near since ' + nums[2] + ' messages!';\nreturn msg;",
+        "func": "const re = /ALARM\\!\\sm\\d*\\s<\\-\\sm\\d*\\,\\sn\\:\\d*/g\nconst num = /\\d+/g\nconst substr = (str,regex) => {\n  return ((str || '').match(regex) || [])\n}\n\nmsg.payload = substr(msg.payload,re)[0];\nvar nums = substr(msg.payload,num);\nvar value1 = 'mote ' + nums[0] + ' has had mote ' + nums[1] + ' too near for ' + nums[2] + ' messages!';\nmsg.payload = { \"value1\": value1};\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 530,
         "y": 80,
         "wires": [
             [
-                "7cf022d0.d33cf4"
+                "32e3806.8e56c8",
+                "20611e2a.05b242"
             ]
         ]
     },
     {
-        "id": "40752fa4.50e23",
+        "id": "31e73207.625f16",
         "type": "switch",
-        "z": "b5d1af96.0416f8",
+        "z": "d945cd76.8a4408",
         "name": "",
         "property": "payload",
         "propertyType": "msg",
@@ -78,7 +79,24 @@
         "y": 80,
         "wires": [
             [
-                "e3dcbb55.657938"
+                "eec9eecd.7da698"
+            ]
+        ]
+    },
+    {
+        "id": "20611e2a.05b242",
+        "type": "http request",
+        "z": "d945cd76.8a4408",
+        "name": "web req",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://maker.ifttt.com/trigger/alarm_received/with/key/hO8ViDYpUMLZiq9sxdGgqGAePhgnju_q_LgOCOmjrAP",
+        "tls": "",
+        "x": 820,
+        "y": 80,
+        "wires": [
+            [
+                "32e3806.8e56c8"
             ]
         ]
     }
