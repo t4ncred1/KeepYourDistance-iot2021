@@ -25,7 +25,7 @@ module keepDistanceC {
 	uint8_t rec_id;
 	message_t packet;
 	status_t status[MAX_NODES];
-	uint8_t counter;
+	uint16_t counter;
 	uint8_t i;
 
 	void debug_message(bool sent, msg_t* mess) {
@@ -44,9 +44,9 @@ module keepDistanceC {
 	void alarm (uint8_t mote1, uint8_t mote2, status_t* status) {
 		dbg("alarm", "MOTE %hhu AND MOTE %hhu HAVE BEEN NEAR FOR ", mote1, mote2);
 		dbg("alarm", "%hhu MESSAGES\n", status->msg_num - status->msg_start);
-//		printf("ALARM! Received %d messages from %d\n", (status->msg_num - status->msg_start)%256, mote2 );
+//		printf("ALARM! Received %d messages from %d\n", (status->msg_num - status->msg_start), mote2 );
 //		printfflush();
-		printf("ALARM! m%d <- m%d, n:%d\n", mote1, mote2, (status->msg_num - status->msg_start)%256);
+		printf("ALARM! m%d <- m%d, n:%d\n", mote1, mote2, (status->msg_num - status->msg_start));
 		printfflush();
 		return;
 	}
@@ -94,7 +94,7 @@ module keepDistanceC {
 
 	event void AMSend.sendDone(message_t* buf, error_t err) {
 		if (&packet == buf && err == SUCCESS ){
-			counter = (counter + 1)%256;								// if message is sent correctly, the next one to be sent must have the counter incremented
+			counter = (counter + 1);								// if message is sent correctly, the next one to be sent must have the counter incremented
 		} else {
 			dbgerror("radio_send", "Failed to send the message.\n");
 		}
@@ -119,7 +119,7 @@ module keepDistanceC {
 					status[rec_id-1].msg_start = mess->counter;		//altrimenti resetto il primo messaggio della sequenza a quello appena ricevuto
 					status[rec_id-1].msg_num = mess->counter;
 				}
-				if((status[rec_id-1].msg_num-status[rec_id-1].msg_start)%256 >= 10)
+				if((status[rec_id-1].msg_num-status[rec_id-1].msg_start) >= 10)
 					alarm(TOS_NODE_ID, rec_id, &status[rec_id-1]);
 			}
 			else {
