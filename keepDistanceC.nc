@@ -112,10 +112,10 @@ module keepDistanceC {
 				debug_message(FALSE, mess);
 				rec_id = mess->id;
 				if(status[rec_id-1].msg_num == (mess->counter)-1){	//se ho ricevuto il messaggio successivo a quello che avevo salvato in precedenza...
-					dbg("radio_pack","sono nel if\n");
+					dbg("debug","sono nel if\n");
 					status[rec_id-1].msg_num = mess->counter;		//allora aggiorno il numero dell'ultimo messaggio ricevuto
 				} else {
-					dbg("radio_pack","sono nel else\n");
+					dbg("debug","sono nel else\n");
 					status[rec_id-1].msg_start = mess->counter;		//altrimenti resetto il primo messaggio della sequenza a quello appena ricevuto
 					status[rec_id-1].msg_num = mess->counter;
 				}
