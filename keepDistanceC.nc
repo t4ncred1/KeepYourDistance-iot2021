@@ -82,6 +82,8 @@ module keepDistanceC {
 			dbg("radio", "Error during the creation of a message\n");
 			return;
 		}
+		printf("sending new message!\n");
+		printfflush();
 		mess->id = TOS_NODE_ID;
 		mess->counter = counter;
 
@@ -104,6 +106,8 @@ module keepDistanceC {
 			return buf;
 		} else {
 			msg_t* mess = (msg_t*)payload;
+			printf("messaggio ricevuto!\n");
+			printfflush();
 			if (0 <= mess->id && mess->id < MAX_NODES) {
 				debug_message(FALSE, mess);
 				rec_id = mess->id;
