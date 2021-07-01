@@ -1,0 +1,78 @@
+% Created 2021-04-17 sab 19:00
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[margin=0.7in, top=0.2in]{geometry} \pagenumbering{gobble} \usepackage{parskip}
+\graphicspath{ {./Images/} }
+\author{Alessandro Dangelo, 10524044 \\
+Tancredi Covioli, 10498705}
+\date{}
+\title{Keep your distance Report}
+\hypersetup{
+pdfauthor={Alessandro Dangelo, 10524044,
+Tancredi Covioli, 10498705},
+pdftitle={Project Report},
+pdfkeywords={},
+pdfsubject={},
+pdfcreator={Emacs 27.1 (Org mode 9.5)}, 
+pdflang={English}}
+\begin{document}
+
+\maketitle
+
+\section{Project proposal}
+Design and implement a software prototype for a social distancing application using TinyOS and Node-Red and test it with Cooja. The application is meant to understand and alert you when two people (motes) are close to each other.
+
+\begin{itemize}
+    \item Each mote broadcasts its presence every 500ms with a message containing the ID number.
+    \item When a mote is in the proximity area of another mote and receives 10 consecutive messages from that mote, it triggers an alarm. Such alarm contains the ID number of the two motes. It is shown in Cooja and forwarded toNode-Red via socket. 
+    \item Upon the reception of the alert, Node-Red sends a notification through IFTTT to your mobile phone.
+\end{itemize}
+
+\section{Assumptions and implementation choices}
+\begin{itemize}
+    \item \textbf{Distance range}: the distance range corresponds to the Transmission range of the mote. It is used the default value in Cooja, since it works on a different order of magnitude with respect to a real social distancing, but still scalable in the order of decimeters. Transmission ranges are equal for each mote.
+    \item \textbf{Population size}: the population size is set to 6 (MAX\_NODES), since a greater number would have been not helpful for testing purposes. It can be increased by editing the header file. 
+    \item \textbf{Alarm message}: the alarm message is sent each time a mote receives 10 consecutive messages from the same corresponding mote. This approach may bring to an incoming message flooding, expecially in crowded use cases in which social distancing may not be easily met. It is energy consuming, but it is a simple way to force social distancing between two or more motes.
+    \item \textbf{Testing}: the system is tested with Cooja, since it gives the possibility to move motes in real time. Some tests have been made also in TOSSIM, but they are not added to the documentation because they have been easily replicated in Cooja.
+    \item \textbf{IFTTT notification}: the alarm message is displayed on the user's smartphone by a notification that appears in the notification menu. Also the Telegram message notification is tested, but the notification results to be less reliable than the classic notification.
+\end{itemize}
+
+\section{Mote's overwiew}
+All motes are equal and they implement the same code: \newline
+a mote has its own id, a personal counter and stores the status of the counters received from other motes around. \newline
+When a mote starts its radio, the counter is set to 0. Once the message containing its own Id and the value of the counter is boadcasted, then the mote increments the counter. \newline
+Upon receipt of a new message, the mote updates its status by checking the sender ID, such that the corresponding value in the status is updated or reset, depending on the value stored and the new value received. \newline
+If one of the counters in the status becomes grater or equal than 10, then the alarm procedure is triggered and a message is sent. This message contains the IDs of the two motes (the one of the neighobring mote and its own) and the time they are not meeting the social distancing rule (as number of consecutive messages). \newline
+As soon as the two neighboring motes goes away from each other, the alarm procedure is stopped. The update of the status never stops, even during the alarm procedure.
+
+\section{Node-Red flow overview}
+The flow begins with a TCP input node. This node is listening to a specific port, that corresponds to the port which a Cooja's mote is connected to. Each mote may potentially be conncected to a specific port, but in this case only one mote is set up this way for testing and debugging purposes. \newline
+All incoming messages are filtered in the next step, this way only the alarm messages go forward. All these messages are then modified without loosing information in order to make them more verbose. \newline
+As last step, a IFTTT service is triggered by sending a URL request to the IFTTT API, containing the verbose message. \newline
+
+\includegraphics{Node-red-flow}
+
+\section{IFTTT overview}
+The IFTTT works this way: \newline
+IF the event "alarm\_received" is triggered \newline
+THEN a notification is sent from the app. \newline
+
+\section{Simulation and testing}
+The project is tested with several topologies and evolutions of them as shown in the following images. Other tests (with more motes) were made, but they were not reported due to lack of specific peculiarities. \newline
+
+% insert here the topology images, but latex sucks
+
+\end{document}
