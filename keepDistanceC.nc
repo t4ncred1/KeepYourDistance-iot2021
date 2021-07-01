@@ -25,7 +25,7 @@ module keepDistanceC {
 	uint8_t rec_id;
 	message_t packet;
 	status_t status[MAX_NODES];
-	uint8_t counter;
+	uint16_t counter;
 	uint8_t i;
 
 	void debug_message(bool sent, msg_t* mess) {
@@ -38,13 +38,17 @@ module keepDistanceC {
 				dbg_clear("radio_pack","\t\t%u : %hhu,%hhu\n", i+1, status[i].msg_num,status[i].msg_start);
 			}
 		//}
+		return;
 	}
 
-	void alarm (uint8_t mote1, uint8_t mote2, uint16_t counter) {
+	void alarm (uint8_t mote1, uint8_t mote2, status_t* status) {
 		dbg("alarm", "MOTE %hhu AND MOTE %hhu HAVE BEEN NEAR FOR ", mote1, mote2);
-		dbg("alarm", "%hhu MESSAGES\n", counter);
-		printf("alarm!\n");
+		dbg("alarm", "%hhu MESSAGES\n", status->msg_num - status->msg_start);
+//		printf("ALARM! Received %d messages from %d\n", (status->msg_num - status->msg_start), mote2 );
+//		printfflush();
+		printf("ALARM! m%d <- m%d, n:%d\n", mote1, mote2, (status->msg_num - status->msg_start));
 		printfflush();
+		return;
 	}
 
 	event void Boot.booted() {
@@ -78,6 +82,8 @@ module keepDistanceC {
 			dbg("radio", "Error during the creation of a message\n");
 			return;
 		}
+		printf("sending new message!\n");
+		printfflush();
 		mess->id = TOS_NODE_ID;
 		mess->counter = counter;
 
@@ -88,7 +94,7 @@ module keepDistanceC {
 
 	event void AMSend.sendDone(message_t* buf, error_t err) {
 		if (&packet == buf && err == SUCCESS ){
-			counter = (counter + 1)%256;								// if message is sent correctly, the next one to be sent must have the counter incremented
+			counter = (counter + 1);								// if message is sent correctly, the next one to be sent must have the counter incremented
 		} else {
 			dbgerror("radio_send", "Failed to send the message.\n");
 		}
@@ -100,24 +106,27 @@ module keepDistanceC {
 			return buf;
 		} else {
 			msg_t* mess = (msg_t*)payload;
+			printf("messaggio ricevuto!\n");
+			printfflush();
 			if (0 <= mess->id && mess->id < MAX_NODES) {
 				debug_message(FALSE, mess);
 				rec_id = mess->id;
 				if(status[rec_id-1].msg_num == (mess->counter)-1){	//se ho ricevuto il messaggio successivo a quello che avevo salvato in precedenza...
-					dbg("radio_pack","sono nel if\n");
+					dbg("debug","sono nel if\n");
 					status[rec_id-1].msg_num = mess->counter;		//allora aggiorno il numero dell'ultimo messaggio ricevuto
 				} else {
-					dbg("radio_pack","sono nel else\n");
+					dbg("debug","sono nel else\n");
 					status[rec_id-1].msg_start = mess->counter;		//altrimenti resetto il primo messaggio della sequenza a quello appena ricevuto
 					status[rec_id-1].msg_num = mess->counter;
 				}
-				if((status[rec_id-1].msg_num-status[rec_id-1].msg_start)%256 >= 10)
-					alarm(TOS_NODE_ID, mess->id, counters[mess->id]);
+				if((status[rec_id-1].msg_num-status[rec_id-1].msg_start) >= 10)
+					alarm(TOS_NODE_ID, rec_id, &status[rec_id-1]);
 			}
 			else {
 				dbgerror("radio_rec", "received a packet with an invalid ID.");
 			}
 		}
+		return buf;
 	}
 
 }

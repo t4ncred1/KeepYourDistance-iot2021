@@ -2,6 +2,7 @@
 *.log
 
 simbuild/
+build/
 TOSSIM.py
 TOSSIM.pyc
 _TOSSIMmodule.so
