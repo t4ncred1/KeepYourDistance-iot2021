@@ -32,20 +32,18 @@ module keepDistanceC {
 		dbg("radio_pack","The following message was correctly %s at time %s\n", (sent ? "sent" : "received"), sim_time_string());
 		dbg_clear("radio_pack","\tid: %hhu \n", mess->id);
 		dbg_clear("radio_pack","\tcounter: %hhu \n", mess->counter);
-		//if(!sent){// FIXME: only display these informations when we have a receive, not a send, and make sure it's after the counter was increased.
+		if(!sent){
 			dbg_clear("radio_pack","\tThe counters are:\n");
 			for(i=0; i<MAX_NODES; i++){
 				dbg_clear("radio_pack","\t\t%u : %hhu,%hhu\n", i+1, status[i].msg_num,status[i].msg_start);
 			}
-		//}
+		}
 		return;
 	}
 
 	void alarm (uint8_t mote1, uint8_t mote2, status_t* status) {
 		dbg("alarm", "MOTE %hhu AND MOTE %hhu HAVE BEEN NEAR FOR ", mote1, mote2);
 		dbg("alarm", "%hhu MESSAGES\n", status->msg_num - status->msg_start);
-//		printf("ALARM! Received %d messages from %d\n", (status->msg_num - status->msg_start), mote2 );
-//		printfflush();
 		printf("ALARM! m%d <- m%d, n:%d\n", mote1, mote2, (status->msg_num - status->msg_start));
 		printfflush();
 		return;
@@ -112,10 +110,8 @@ module keepDistanceC {
 				debug_message(FALSE, mess);
 				rec_id = mess->id;
 				if(status[rec_id-1].msg_num == (mess->counter)-1){	//se ho ricevuto il messaggio successivo a quello che avevo salvato in precedenza...
-					dbg("debug","sono nel if\n");
 					status[rec_id-1].msg_num = mess->counter;		//allora aggiorno il numero dell'ultimo messaggio ricevuto
 				} else {
-					dbg("debug","sono nel else\n");
 					status[rec_id-1].msg_start = mess->counter;		//altrimenti resetto il primo messaggio della sequenza a quello appena ricevuto
 					status[rec_id-1].msg_num = mess->counter;
 				}
