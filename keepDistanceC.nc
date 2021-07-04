@@ -80,8 +80,6 @@ module keepDistanceC {
 			dbg("radio", "Error during the creation of a message\n");
 			return;
 		}
-		printf("sending new message!\n");
-		printfflush();
 		mess->id = TOS_NODE_ID;
 		mess->counter = counter;
 
@@ -104,8 +102,6 @@ module keepDistanceC {
 			return buf;
 		} else {
 			msg_t* mess = (msg_t*)payload;
-			printf("messaggio ricevuto!\n");
-			printfflush();
 			if (0 <= mess->id && mess->id < MAX_NODES) {
 				debug_message(FALSE, mess);
 				rec_id = mess->id;
@@ -115,7 +111,7 @@ module keepDistanceC {
 					status[rec_id-1].msg_start = mess->counter;		//altrimenti resetto il primo messaggio della sequenza a quello appena ricevuto
 					status[rec_id-1].msg_num = mess->counter;
 				}
-				if((status[rec_id-1].msg_num-status[rec_id-1].msg_start) >= 10)
+				if((status[rec_id-1].msg_num-status[rec_id-1].msg_start) >= 10)	// ==10 if you want to limit the flooding messages
 					alarm(TOS_NODE_ID, rec_id, &status[rec_id-1]);
 			}
 			else {
