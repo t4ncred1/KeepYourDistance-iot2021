@@ -18,7 +18,6 @@ module keepDistanceC {
 		interface Receive;
 		interface Packet;
 		interface Timer<TMilli> as Timer;
-		//interface PacketAcknowledgements;
 	}
 
 } implementation {
@@ -57,7 +56,7 @@ module keepDistanceC {
 	event void SplitControl.startDone(error_t err) {
 		if(err == SUCCESS){
 			dbg("radio", "Radio on!\n");
-			counter = 0;								//when radio channel is started, reset the counter of the mote
+			counter = 0;								//quando il canale radio si avvia, il contatore del mote viene resettato
 			for(i=0; i<MAX_NODES; i++){
 				status[i].msg_num = 0;
 				status[i].msg_start = 0;
@@ -70,7 +69,7 @@ module keepDistanceC {
 	}
 
 	event void SplitControl.stopDone(error_t err) {
-		//TODO
+		dbg("init","%hhu turned off radio\n as a wise moon once said: 'io non vedo l'ora di tornare!'\n", TOS_NODE_ID);
 	}
 
 	event void Timer.fired() {
@@ -90,7 +89,7 @@ module keepDistanceC {
 
 	event void AMSend.sendDone(message_t* buf, error_t err) {
 		if (&packet == buf && err == SUCCESS ){
-			counter = (counter + 1);								// if message is sent correctly, the next one to be sent must have the counter incremented
+			counter = (counter + 1);								// se il messaggio è stato inviato correttamente, il prossimo messaggio da inviare dovrà avere il contatore incrementato
 		} else {
 			dbgerror("radio_send", "Failed to send the message.\n");
 		}
@@ -102,7 +101,7 @@ module keepDistanceC {
 			return buf;
 		} else {
 			msg_t* mess = (msg_t*)payload;
-			if (0 <= mess->id && mess->id < MAX_NODES) {
+			if (0 < mess->id && mess->id <= MAX_NODES) {
 				debug_message(FALSE, mess);
 				rec_id = mess->id;
 				if(status[rec_id-1].msg_num == (mess->counter)-1){	//se ho ricevuto il messaggio successivo a quello che avevo salvato in precedenza...
@@ -110,8 +109,10 @@ module keepDistanceC {
 				} else {
 					status[rec_id-1].msg_start = mess->counter;		//altrimenti resetto il primo messaggio della sequenza a quello appena ricevuto
 					status[rec_id-1].msg_num = mess->counter;
+					printf("m%d: m%d got near me\n", TOS_NODE_ID, rec_id);
+					printfflush();
 				}
-				if((status[rec_id-1].msg_num-status[rec_id-1].msg_start) >= 10)	// ==10 if you want to limit the flooding messages
+				if((status[rec_id-1].msg_num-status[rec_id-1].msg_start)%10 == 0 && (status[rec_id-1].msg_num-status[rec_id-1].msg_start) != 0)
 					alarm(TOS_NODE_ID, rec_id, &status[rec_id-1]);
 			}
 			else {
