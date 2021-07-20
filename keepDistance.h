@@ -24,6 +24,6 @@ enum{
 };
 
 #define PERIOD 500
-#define MAX_NODES 6
+#define MAX_NODES 10
 
 #endif
