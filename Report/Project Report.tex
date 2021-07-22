@@ -15,6 +15,7 @@
 \usepackage{capt-of}
 \usepackage{hyperref}
 \usepackage{float}
+\usepackage[font={footnotesize,it}]{caption}
 \usepackage[margin=0.7in, top=0.2in]{geometry} \pagenumbering{gobble} \usepackage{parskip}
 \graphicspath{ {./Images/} }
 \author{Alessandro Dangelo, 10524044 \\
@@ -26,54 +27,65 @@ Tancredi Covioli, 10498705}
 \maketitle
 
 \section{Project proposal}
-Design and implement a software prototype for a social distancing application using TinyOS and Node-Red and test it with Cooja. The application is meant to understand and alert you when two people (motes) are close to each other.
+Design and implement a software prototype for a social distancing application using TinyOS and Node-Red and test it with Cooja. The application is meant to understand and alert you when two people (motes) are close to each other, and it is developed in three steps:
 
 \begin{itemize}
     \item Each mote broadcasts its presence every 500ms with a message containing the ID number.
-    \item When a mote is in the proximity area of another mote and receives 10 consecutive messages from that mote, it triggers an alarm. Such alarm contains the ID number of the two motes. It is shown in Cooja and forwarded toNode-Red via socket. 
+    \item When a mote is in the proximity area of another mote and receives 10 consecutive messages from that mote, it triggers an alarm. Such alarm contains the ID number of the two motes. It is shown in Cooja and forwarded to Node-Red via socket. 
     \item Upon the reception of the alert, Node-Red sends a notification through IFTTT to your mobile phone.
 \end{itemize}
 
 \section{Assumptions and implementation choices}
+Some assumptions and implementation choices that have been made are:
 \begin{itemize}
-    \item \textbf{Distance range}: the distance range corresponds to the Transmission range of the mote. It is used the default value in Cooja, since it works on a different order of magnitude with respect to a real social distancing, but still scalable in the order of decimeters. Transmission ranges are equal for each mote.
-    \item \textbf{Population size}: the population size is set to 6 (MAX\_NODES), since a greater number would have been not helpful for testing purposes. It can be increased by editing the header file. 
-    \item \textbf{Alarm message}: the alarm message is sent each time a mote receives 10 consecutive messages from the same corresponding mote. This approach may bring to an incoming message flooding, expecially in crowded use cases in which social distancing may not be easily met. It is energy consuming, but it is a simple way to force social distancing between two or more motes.
-    \item \textbf{Testing}: the system is tested with Cooja, since it gives the possibility to move motes in real time. Some tests have been made also in TOSSIM, but they are not added to the documentation because they have been easily replicated in Cooja.
-    \item \textbf{IFTTT notification}: the alarm message is displayed on the user's smartphone by a notification that appears in the notification menu. Also the Telegram message notification is tested, but the notification results to be less reliable than the classic notification.
+    \item \textbf{Distance range}: the distance range corresponds to the Transmission range of the mote. It is used the default value given by Cooja, which is an order of magnitude greater than a real social distancing application, but makes the management of the motes easier. Transmission ranges are equal for each mote.
+    \item \textbf{Population size}: the population size is set to 10 (MAX\_NODES), since a greater number would have been not helpful for testing purposes. It can be increased by editing the header file.
+    \item \textbf{Alarm message}: the alarm message is sent each time a mote receives 10 consecutive messages from the same corresponding mote, and it is sent again once 10 more messages are received. This approach was chosen to avoid a flood of incoming messages, expecially in crowded use cases in which social distancing may not be easily met.
+    \item \textbf{Testing}: the system is tested with Cooja, since it gives the possibility to move motes in real time. Some tests have been made also in TOSSIM, but they have not been included in the documentation because they have been easily replicated in Cooja.
+    \item \textbf{IFTTT notification}: the alarm message is displayed on the user's smartphone by a notification that appears in the notification menu. The Telegram message notification method was also tested, but it resulted in a more annoying experience.
 \end{itemize}
 
 \section{Mote's overwiew}
 All motes are equal and they implement the same code: \newline
 a mote has its own id, a personal counter and stores the status of the counters received from other motes around. \newline
-When a mote starts its radio, the counter is set to 0. Once the message containing its own Id and the value of the counter is boadcasted, then the mote increments the counter. \newline
-Upon receipt of a new message, the mote updates its status by checking the sender ID, such that the corresponding value in the status is updated or reset, depending on the value stored and the new value received. \newline
-If one of the counters in the status becomes grater or equal than 10, then the alarm procedure is triggered and a message is sent. This message contains the IDs of the two motes (the one of the neighobring mote and its own) and the time they are not meeting the social distancing rule (as number of consecutive messages). \newline
-As soon as the two neighboring motes goes away from each other, the alarm procedure is stopped. The update of the status never stops, even during the alarm procedure.
+\begin{wrapfigure}{r}{0.34\textwidth}
+  \begin{center}
+    \includegraphics[width=0.34\textwidth]{status_update_diagram.png}
+    \caption{Evolution of the status of mote 3}
+  \end{center}
+\end{wrapfigure}
+When a mote starts its radio, the counter is set to 0. Once the message containing its own Id and the value of the counter is broadcasted, then the mote increments its counter. \newline
+Upon reception of a new message, the mote updates its status by checking the sender ID, this way the corresponding value in the status is updated or reset, depending on the value stored and the new value received. \newline
+If one of the counters in the status becomes a multiple of 10, then the alarm procedure is triggered and a message is sent. This message contains the IDs of the two motes (the one of the neighboring mote and its own) and the number of consecutive messages that either one received from the other. \newline
+As soon as the two neighboring motes go away from each other, the alarm procedure is stopped.
 
 \section{Node-Red flow overview}
-The flow begins with a TCP input node. This node is listening to a specific port, that corresponds to the port which a Cooja's mote is connected to. Each mote may potentially be conncected to a specific port, but in this case only one mote is set up this way for testing and debugging purposes. \newline
-All incoming messages are filtered in the next step, this way only the alarm messages go forward. All these messages are then modified without loosing information in order to make them more verbose. \newline
-As last step, a IFTTT service is triggered by sending a URL request to the IFTTT API, containing the verbose message. \newline
+The flow (shown in figure \ref{nodered}) begins with a TCP input node. This node is connected to a specific port, that corresponds to the port which a Cooja's mote is listening on. Each mote may potentially listening on a specific port, but in this case only one mote is set up this way for testing and debugging purposes. \newline
+All incoming messages are filtered in the next step, this way only the alarm messages are forwarded. All these messages are then turned into sentences, without losing information. \newline
+As last step, a IFTTT service is triggered by sending a URL request to the IFTTT API, containing the message. \newline
 
 \begin{figure}[H]
   \begin{minipage}{0.6\textwidth}
     \includegraphics[height=108px]{Node-red-flow}
-    \caption{porco}
+    \caption{Node-Red flow}
+    \label{nodered}
   \end{minipage}
   \begin{minipage}{0.39\textwidth}
     \includegraphics[height=108px]{ifttt-screenshot}
-    \caption{cane}
+    \caption{IFTTT applet}
+    \label{ifttt}
   \end{minipage}
 \end{figure}
 
 \section{IFTTT overview}
-The IFTTT works this way: \newline
+The IFTTT applet used works this way (as shown in figure \ref{ifttt}): \newline
 IF the event "alarm\_received" is triggered \newline
 THEN a notification is sent from the app. \newline
 
 \section{Simulation and testing}
-The project is tested with several topologies and evolutions of them as shown in the following images. Other tests (with more motes) were made, but they were not reported due to lack of specific peculiarities. \newline
+The project was tested with several topologies and evolutions of them. Other tests (with less motes) were made, but they were not reported due to lack of specific peculiarities. \newline
+
+The project was tested with several topologies; in this documentation a 10-mote simulation is described, since it seemed like a good middleground between stressing the system and discovering edge cases.
 
 % creo i 10 motes ad ampia distanza e, una volta avviata la simulazione li abbiamo avvicinati
 %
