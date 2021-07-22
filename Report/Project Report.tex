@@ -14,20 +14,13 @@
 \usepackage{amssymb}
 \usepackage{capt-of}
 \usepackage{hyperref}
+\usepackage{float}
 \usepackage[margin=0.7in, top=0.2in]{geometry} \pagenumbering{gobble} \usepackage{parskip}
 \graphicspath{ {./Images/} }
 \author{Alessandro Dangelo, 10524044 \\
 Tancredi Covioli, 10498705}
 \date{}
 \title{Keep your distance Report}
-\hypersetup{
-pdfauthor={Alessandro Dangelo, 10524044,
-Tancredi Covioli, 10498705},
-pdftitle={Project Report},
-pdfkeywords={},
-pdfsubject={},
-pdfcreator={Emacs 27.1 (Org mode 9.5)}, 
-pdflang={English}}
 \begin{document}
 
 \maketitle
@@ -63,7 +56,16 @@ The flow begins with a TCP input node. This node is listening to a specific port
 All incoming messages are filtered in the next step, this way only the alarm messages go forward. All these messages are then modified without loosing information in order to make them more verbose. \newline
 As last step, a IFTTT service is triggered by sending a URL request to the IFTTT API, containing the verbose message. \newline
 
-\includegraphics{Node-red-flow}
+\begin{figure}[H]
+  \begin{minipage}{0.6\textwidth}
+    \includegraphics[height=108px]{Node-red-flow}
+    \caption{porco}
+  \end{minipage}
+  \begin{minipage}{0.39\textwidth}
+    \includegraphics[height=108px]{ifttt-screenshot}
+    \caption{cane}
+  \end{minipage}
+\end{figure}
 
 \section{IFTTT overview}
 The IFTTT works this way: \newline
@@ -73,6 +75,24 @@ THEN a notification is sent from the app. \newline
 \section{Simulation and testing}
 The project is tested with several topologies and evolutions of them as shown in the following images. Other tests (with more motes) were made, but they were not reported due to lack of specific peculiarities. \newline
 
+% creo i 10 motes ad ampia distanza e, una volta avviata la simulazione li abbiamo avvicinati
+%
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.1\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{Topology10-no-range}
+    \caption{porco}
+  \end{minipage}
+  \begin{minipage}{0.1\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{Topology3-no-range}
+    \caption{cane}
+  \end{minipage}
+\end{figure}
+
+conclusions and others.
 % insert here the topology images, but latex sucks
 
 \end{document}
