@@ -15,7 +15,7 @@
 \usepackage{capt-of}
 \usepackage{hyperref}
 \usepackage{float}
-\usepackage[font={footnotesize,it}]{caption}
+\usepackage[font={footnotesize,it}, justification=centering]{caption}
 \usepackage[margin=0.7in, top=0.3in]{geometry} \pagenumbering{gobble} \usepackage{parskip}
 \graphicspath{ {./Images/} }
 \author{Alessandro Dangelo, 10524044 \\
@@ -38,16 +38,16 @@ Design and implement a software prototype for a social distancing application us
 \section{Assumptions and implementation choices}
 Some assumptions and implementation choices that have been made are:
 \begin{itemize}
-  \item \textbf{Distance range}: the distance range corresponds to the Transmission range of the mote. It is used the default value given by Cooja, which is an order of magnitude greater than a real social distancing application, but makes the management of the motes easier. Transmission ranges are equal for each mote.
-  \item \textbf{Population size}: the population size is set to 10 (MAX\_NODES), since a greater number would have been not helpful for testing purposes. It can be increased by editing the header file.
+  \item \textbf{Distance range}: the distance range corresponds to the Transmission range of the mote. It is used the default value given by Cooja, which is an order of magnitude greater than a real social distancing application, but makes the management of the motes easier. Transmission ranges are the same for every mote.
+  \item \textbf{Population size}: the population size is set to 10, since a greater number would have been not helpful for testing purposes. It can be increased by editing the header file (\texttt{MAX\_NODES}).
   \item \textbf{Alarm message}: the alarm message is sent each time a mote receives 10 consecutive messages from the same corresponding mote, and it is sent again once 10 more messages are received. This approach was chosen to avoid a flood of incoming messages, expecially in crowded use cases in which social distancing may not be easily met.
   \item \textbf{Testing}: the system is tested with Cooja, since it gives the possibility to move motes in real time. Some tests have been made also in TOSSIM, but they have not been included in the documentation because they have been easily replicated in Cooja.
-  \item \textbf{IFTTT notification}: the alarm message is displayed on the user's smartphone by a notification that appears in the notification menu. The Telegram message notification method was also tested, but it resulted in a more annoying experience.
+  \item \textbf{IFTTT notification}: the alarm message is displayed on the user's smartphone by a notification that appears in the notification menu. The Telegram message notification method was also tested, but it resulted in a less polished experience.
 \end{itemize}
 
 \section{Mote's overwiew}
 All motes are equal and they implement the same code: \newline
-a mote has its own id, a personal counter and stores the status of the counters received from other motes around. \newline
+a mote has its own id, a personal counter and stores the status of the counters received from the other motes around. \newline
 \begin{wrapfigure}{r}{0.40\textwidth}
   \begin{center}
     \includegraphics[width=0.40\textwidth]{status_update_diagram.png}
@@ -60,9 +60,9 @@ If one of the counters in the status becomes a multiple of 10, then the alarm pr
 As soon as the two neighboring motes go away from each other, the alarm procedure is stopped.
 
 \section{Node-Red flow overview}
-The flow (shown in figure \ref{nodered}) begins with a TCP input node. This node is connected to a specific port, that corresponds to the port which a Cooja's mote is listening on. Each mote may potentially listening on a specific port, but in this case only one mote is set up this way for testing and debugging purposes. \newline
+The flow (shown in figure \ref{nodered}) begins with a TCP input node. This node is connected to a specific port, that corresponds to the port which a Cooja's mote is listening on. Each mote may be listening on a specific port, but in this case only one mote is set up this way for testing and debugging purposes. \newline
 All incoming messages are filtered in the next step, this way only the alarm messages are forwarded. All these messages are then turned into sentences, without losing information. \newline
-As last step, a IFTTT service is triggered by sending a URL request to the IFTTT API, containing the message.
+As last step, an IFTTT service is triggered by sending an URL request to the IFTTT API, containing the message.
 
 \begin{figure}[H]
   \begin{minipage}{0.6\textwidth}
@@ -86,9 +86,9 @@ THEN a notification is sent from the app.
 The project was tested with several topologies; in this documentation a 10-mote simulation is described, since it seemed like a good middleground between stressing the system and discovering edge cases. \newline
 During the simulation different scenarios were tested in sequence:
 \begin{enumerate}
-  \item All motes are far enough from each other in order not to violate the distantiation rule (\hyperref[distantiation]{figure on the left}).
-  \item The motes form four groups with different number of members (\hyperref[small-groups]{center figure}).
-  \item A group is dismantled and its members are assigned to different groups (\hyperref[crowded-groups]{figure on the right}).
+  \item All motes are far enough from each other not to violate the distantiation rule (figure \ref{distantiation}).
+  \item The motes form four groups with different number of members (figure \ref{small-groups}).
+  \item A group is dismantled and its members are assigned to different groups (figure \ref{crowded-groups}).
 \end{enumerate}
 
 \begin{figure}[H]
@@ -96,21 +96,21 @@ During the simulation different scenarios were tested in sequence:
   \begin{minipage}{0.32\textwidth}
     \centering
     \frame{\includegraphics[height=118px]{Topology10-range-run}}
-    \caption*{motes follow distantiation rule}
+    \caption{\\motes follow distantiation rule}
     \label{distantiation}
     
   \end{minipage}
   \begin{minipage}{0.32\textwidth}
     \centering
     \frame{\includegraphics[height=118px]{Topology10-range-run-1_2-3_4-5_6_7_8-9_10}}
-    \caption*{some small groups are created}
+    \caption{\\some small groups are created}
     \label{small-groups}
     
   \end{minipage}
   \begin{minipage}{0.32\textwidth}
     \centering
     \frame{\includegraphics[height=118px]{Topology10-range-run-1_2-3_4_7_8-5_6_9_10}}
-    \caption*{few crowded groups are created}
+    \caption{\\few crowded groups are created}
     \label{crowded-groups}
     
   \end{minipage}
@@ -133,9 +133,9 @@ Simulations had results in line with what it was expected, but two peculiar beha
   \label{timeline}
 \end{figure}
 
-An example of the two behaviors can be noticed in the logs provided with this documentation (\texttt{log10motes}) at timestamp 59s. In figure \ref{timeline} we can notice that mote 6 starts the transmittion of a packet and a few milliseconds later mote 10 does the same. Mote 5, which is in range of both, receives corrupted data as soon as mote 10 starts its transmission because of the collision. \newline
+An example of the two behaviors can be noticed in figure \ref{crowded-groups}, at timestamp 59s (see the log provided with this documentation, \texttt{log10motes}). In figure \ref{timeline} we can notice that mote 6 starts the transmittion of a packet and a few milliseconds later mote 10 does the same. Mote 5, which is in range of both, receives corrupted data as soon as mote 10 starts its transmission because of the collision. \newline
 At the same time, as mote 10 is receiving the packet from mote 6, its transmission timer fires and the reception is stopped. \newline
-The result is that motes 5, 6, 10 miss a message and, in turn, reset their counter (as shown in figure \ref{log}).
+The result is that motes 5, 6 and 10 miss a message and, in turn, reset their counter (as shown in figure \ref{log}).
 
 \begin{figure}[H]
   \centering
