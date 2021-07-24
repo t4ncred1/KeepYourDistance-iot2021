@@ -21,11 +21,11 @@ module keepDistanceC {
 	}
 
 } implementation {
-	uint8_t rec_id;
+	uint8_t rec_id;										//ID del mote che ha inviato il messaggio ricevuto 
 	message_t packet;
-	status_t status[MAX_NODES];
-	uint16_t counter;
-	uint8_t i;
+	status_t status[MAX_NODES];							//array di stati, uno per ogni mote
+	uint16_t counter;									//counter di questo mote
+	uint8_t i;											//variabile ausiliaria
 
 	void debug_message(bool sent, msg_t* mess) {
 		dbg("radio_pack","The following message was correctly %s at time %s\n", (sent ? "sent" : "received"), sim_time_string());
@@ -89,7 +89,7 @@ module keepDistanceC {
 
 	event void AMSend.sendDone(message_t* buf, error_t err) {
 		if (&packet == buf && err == SUCCESS ){
-			counter = (counter + 1);								// se il messaggio è stato inviato correttamente, il prossimo messaggio da inviare dovrà avere il contatore incrementato
+			counter = (counter + 1);					// se il messaggio è stato inviato correttamente, il prossimo messaggio da inviare dovrà avere il contatore incrementato
 		} else {
 			dbgerror("radio_send", "Failed to send the message.\n");
 		}

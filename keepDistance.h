@@ -23,7 +23,7 @@ enum{
    AM_SEND_MSG = 6,
 };
 
-#define PERIOD 500
-#define MAX_NODES 10
+#define PERIOD 500					//intervallo di tempo per l'invio dei messaggi
+#define MAX_NODES 10				//numero massimo di motes
 
 #endif
