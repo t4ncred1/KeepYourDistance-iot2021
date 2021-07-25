@@ -60,7 +60,7 @@ If one of the counters in the status becomes a multiple of 10, then the alarm pr
 As soon as the two neighboring motes go away from each other, the alarm procedure is stopped.
 
 \section{Node-Red flow overview}
-The flow (shown in figure \ref{nodered}) begins with a TCP input node. This node is connected to a specific port, that corresponds to the port which a Cooja's mote is listening on. Each mote may be listening on a specific port, but in this case only one mote is set up this way for testing and debugging purposes. \newline
+The flow (shown in figure \ref{nodered}) begins with a TCP input node. This node is connected to a specific port, that corresponds to the port which a Cooja's mote is listening on. Each mote may be listening on a specific port, but in this case only one mote is set up this way for testing and debugging purposes (a configuration with 10 motes listening was also tested). \newline
 All incoming messages are filtered in the next step, this way only the alarm messages are forwarded. All these messages are then turned into sentences, without losing information. \newline
 As last step, an IFTTT service is triggered by sending an URL request to the IFTTT API, containing the message.
 
