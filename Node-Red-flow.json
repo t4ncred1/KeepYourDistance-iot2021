@@ -2,7 +2,7 @@
     {
         "id": "1479e1f4.6f5d7e",
         "type": "tab",
-        "label": "Project Flow",
+        "label": "Flow 1",
         "disabled": false,
         "info": ""
     },
@@ -19,8 +19,8 @@
         "newline": "\\n",
         "topic": "",
         "base64": false,
-        "x": 130,
-        "y": 80,
+        "x": 110,
+        "y": 140,
         "wires": [
             [
                 "643843cc.86b154"
@@ -37,8 +37,8 @@
         "console": false,
         "tostatus": false,
         "complete": "payload",
-        "x": 580,
-        "y": 160,
+        "x": 740,
+        "y": 420,
         "wires": []
     },
     {
@@ -49,8 +49,8 @@
         "func": "const re = /ALARM\\!\\sm\\d*\\s<\\-\\sm\\d*\\,\\sn\\:\\d*/g\nconst num = /\\d+/g\nconst substr = (str,regex) => {\n  return ((str || '').match(regex) || [])\n}\n\nmsg.payload = substr(msg.payload,re)[0];\nvar nums = substr(msg.payload,num);\nvar value1 = 'mote ' + nums[0] + ' has had mote ' + nums[1] + ' too near for ' + nums[2] + ' messages!';\nmsg.payload = { \"value1\": value1};\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 260,
-        "y": 160,
+        "x": 440,
+        "y": 420,
         "wires": [
             [
                 "516335.0bd514cc",
@@ -75,8 +75,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 310,
-        "y": 80,
+        "x": 490,
+        "y": 340,
         "wires": [
             [
                 "c7667472.b9428"
@@ -92,8 +92,8 @@
         "ret": "txt",
         "url": "https://maker.ifttt.com/trigger/alarm_received/with/key/lQDFQA9PgpFPqDylvo7mF",
         "tls": "",
-        "x": 170,
-        "y": 240,
+        "x": 350,
+        "y": 500,
         "wires": [
             [
                 "6f269f67.1f42a8"
@@ -105,13 +105,202 @@
         "type": "debug",
         "z": "1479e1f4.6f5d7e",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "payload",
-        "x": 390,
-        "y": 240,
+        "x": 550,
+        "y": 500,
         "wires": []
+    },
+    {
+        "id": "9319d28.7f5b03",
+        "type": "tcp in",
+        "z": "1479e1f4.6f5d7e",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60007",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 110,
+        "y": 380,
+        "wires": [
+            [
+                "643843cc.86b154"
+            ]
+        ]
+    },
+    {
+        "id": "65d7e068.339348",
+        "type": "tcp in",
+        "z": "1479e1f4.6f5d7e",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60006",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 110,
+        "y": 340,
+        "wires": [
+            [
+                "643843cc.86b154"
+            ]
+        ]
+    },
+    {
+        "id": "8ce08777.d6a7c",
+        "type": "tcp in",
+        "z": "1479e1f4.6f5d7e",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60005",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 110,
+        "y": 300,
+        "wires": [
+            [
+                "643843cc.86b154"
+            ]
+        ]
+    },
+    {
+        "id": "5a0621fb.29249",
+        "type": "tcp in",
+        "z": "1479e1f4.6f5d7e",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60004",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 110,
+        "y": 260,
+        "wires": [
+            [
+                "643843cc.86b154"
+            ]
+        ]
+    },
+    {
+        "id": "d0bc8a63.a9bb6",
+        "type": "tcp in",
+        "z": "1479e1f4.6f5d7e",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60003",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 110,
+        "y": 220,
+        "wires": [
+            [
+                "643843cc.86b154"
+            ]
+        ]
+    },
+    {
+        "id": "881be165.efe7f",
+        "type": "tcp in",
+        "z": "1479e1f4.6f5d7e",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60002",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 110,
+        "y": 180,
+        "wires": [
+            [
+                "643843cc.86b154"
+            ]
+        ]
+    },
+    {
+        "id": "b649b01f.419758",
+        "type": "tcp in",
+        "z": "1479e1f4.6f5d7e",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60010",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 110,
+        "y": 500,
+        "wires": [
+            [
+                "643843cc.86b154"
+            ]
+        ]
+    },
+    {
+        "id": "3b3379f3.2bf52e",
+        "type": "tcp in",
+        "z": "1479e1f4.6f5d7e",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60008",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 110,
+        "y": 420,
+        "wires": [
+            [
+                "643843cc.86b154"
+            ]
+        ]
+    },
+    {
+        "id": "c3bdaeb5.c6897",
+        "type": "tcp in",
+        "z": "1479e1f4.6f5d7e",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60009",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 110,
+        "y": 460,
+        "wires": [
+            [
+                "643843cc.86b154"
+            ]
+        ]
     }
 ]

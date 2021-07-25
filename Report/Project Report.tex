@@ -60,7 +60,7 @@ If one of the counters in the status becomes a multiple of 10, then the alarm pr
 As soon as the two neighboring motes go away from each other, the alarm procedure is stopped.
 
 \section{Node-Red flow overview}
-The flow (shown in figure \ref{nodered}) begins with a TCP input node. This node is connected to a specific port, that corresponds to the port which a Cooja's mote is listening on. Each mote may be listening on a specific port, but in this case only one mote is set up this way for testing and debugging purposes (a configuration with 10 motes listening was also tested). \newline
+The flow (shown in figure \ref{nodered}) begins with some TCP input nodes. These nodes are each connected to a specific port, that corresponds to the port which a Cooja's mote is listening on. Each mote may be listening on a specific port (in figure \ref{nodered} the flow is shown connected only to one port to save space, but in the attached flow it is connected to 10 ports). \newline %%, but in this case only one mote is set up this way for testing and debugging purposes (a configuration with 10 motes listening was also tested, see ).
 All incoming messages are filtered in the next step, this way only the alarm messages are forwarded. All these messages are then turned into sentences, without losing information. \newline
 As last step, an IFTTT service is triggered by sending an URL request to the IFTTT API, containing the message.
 
@@ -133,7 +133,7 @@ Simulations had results in line with what it was expected, but two peculiar beha
   \label{timeline}
 \end{figure}
 
-An example of the two behaviors can be noticed in figure \ref{crowded-groups}, at timestamp 59s (see the log provided with this documentation, \texttt{log10motes}). In figure \ref{timeline} we can notice that mote 6 starts the transmittion of a packet and a few milliseconds later mote 10 does the same. Mote 5, which is in range of both, receives corrupted data as soon as mote 10 starts its transmission because of the collision. \newline
+An example of the two behaviors can be noticed in figure \ref{crowded-groups}, at timestamp 59s (see the log provided with this documentation, \texttt{log10motesDoc}). In figure \ref{timeline} we can notice that mote 6 starts the transmittion of a packet and a few milliseconds later mote 10 does the same. Mote 5, which is in range of both, receives corrupted data as soon as mote 10 starts its transmission because of the collision. \newline
 At the same time, as mote 10 is receiving the packet from mote 6, its transmission timer fires and the reception is stopped. \newline
 The result is that motes 5, 6 and 10 miss a message and, in turn, reset their counter (as shown in figure \ref{log}).
 

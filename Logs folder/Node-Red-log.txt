@@ -1,0 +1,320 @@
+{"value1":"mote 1 has had mote 2 too near for 10 messages!"}
+{"value1":"mote 2 has had mote 1 too near for 10 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 3 has had mote 4 too near for 10 messages!"}
+{"value1":"mote 4 has had mote 3 too near for 10 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 10 has had mote 9 too near for 10 messages!"}
+{"value1":"mote 9 has had mote 10 too near for 10 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 1 has had mote 2 too near for 20 messages!"}
+{"value1":"mote 2 has had mote 1 too near for 20 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 6 has had mote 7 too near for 10 messages!"}
+{"value1":"mote 7 has had mote 6 too near for 10 messages!"}
+{"value1":"mote 3 has had mote 4 too near for 20 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 4 has had mote 3 too near for 20 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 7 has had mote 8 too near for 10 messages!"}
+{"value1":"mote 8 has had mote 7 too near for 10 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 10 has had mote 9 too near for 20 messages!"}
+{"value1":"mote 9 has had mote 10 too near for 20 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 1 has had mote 2 too near for 30 messages!"}
+{"value1":"mote 2 has had mote 1 too near for 30 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 6 has had mote 5 too near for 10 messages!"}
+{"value1":"mote 5 has had mote 6 too near for 10 messages!"}
+{"value1":"mote 6 has had mote 7 too near for 20 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 7 has had mote 6 too near for 20 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 3 has had mote 4 too near for 30 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 4 has had mote 3 too near for 30 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 7 has had mote 8 too near for 20 messages!"}
+{"value1":"mote 8 has had mote 7 too near for 20 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 10 has had mote 9 too near for 30 messages!"}
+{"value1":"mote 9 has had mote 10 too near for 30 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 1 has had mote 2 too near for 40 messages!"}
+{"value1":"mote 2 has had mote 1 too near for 40 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 6 has had mote 5 too near for 20 messages!"}
+{"value1":"mote 5 has had mote 6 too near for 20 messages!"}
+{"value1":"mote 6 has had mote 7 too near for 30 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 7 has had mote 6 too near for 30 messages!"}
+{"value1":"mote 3 has had mote 4 too near for 40 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 4 has had mote 3 too near for 40 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 7 has had mote 8 too near for 30 messages!"}
+{"value1":"mote 8 has had mote 7 too near for 30 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 10 has had mote 9 too near for 40 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 9 has had mote 10 too near for 40 messages!"}
+{"value1":"mote 1 has had mote 2 too near for 50 messages!"}
+{"value1":"mote 2 has had mote 1 too near for 50 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 6 has had mote 5 too near for 30 messages!"}
+{"value1":"mote 5 has had mote 6 too near for 30 messages!"}
+{"value1":"mote 6 has had mote 7 too near for 40 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 7 has had mote 6 too near for 40 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 3 has had mote 4 too near for 50 messages!"}
+{"value1":"mote 4 has had mote 3 too near for 50 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 7 has had mote 8 too near for 40 messages!"}
+{"value1":"mote 8 has had mote 7 too near for 40 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 10 has had mote 9 too near for 50 messages!"}
+{"value1":"mote 9 has had mote 10 too near for 50 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 1 has had mote 2 too near for 60 messages!"}
+{"value1":"mote 2 has had mote 1 too near for 60 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 6 has had mote 5 too near for 40 messages!"}
+{"value1":"mote 5 has had mote 6 too near for 40 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 3 has had mote 4 too near for 60 messages!"}
+{"value1":"mote 4 has had mote 3 too near for 60 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 7 has had mote 8 too near for 50 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 8 has had mote 7 too near for 50 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 4 has had mote 8 too near for 10 messages!"}
+{"value1":"mote 3 has had mote 8 too near for 10 messages!"}
+{"value1":"mote 10 has had mote 9 too near for 60 messages!"}
+{"value1":"mote 8 has had mote 4 too near for 10 messages!"}
+{"value1":"mote 7 has had mote 4 too near for 10 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 4 has had mote 7 too near for 10 messages!"}
+{"value1":"mote 3 has had mote 7 too near for 10 messages!"}
+{"value1":"mote 7 has had mote 3 too near for 10 messages!"}
+{"value1":"mote 8 has had mote 3 too near for 10 messages!"}
+{"value1":"mote 9 has had mote 10 too near for 60 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 1 has had mote 2 too near for 70 messages!"}
+{"value1":"mote 2 has had mote 1 too near for 70 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 6 has had mote 5 too near for 50 messages!"}
+{"value1":"mote 5 has had mote 6 too near for 50 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 3 has had mote 4 too near for 70 messages!"}
+{"value1":"mote 4 has had mote 3 too near for 70 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 7 has had mote 8 too near for 60 messages!"}
+{"value1":"mote 8 has had mote 7 too near for 60 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 4 has had mote 8 too near for 20 messages!"}
+{"value1":"mote 3 has had mote 8 too near for 20 messages!"}
+{"value1":"mote 10 has had mote 9 too near for 70 messages!"}
+{"value1":"mote 7 has had mote 4 too near for 20 messages!"}
+{"value1":"mote 8 has had mote 4 too near for 20 messages!"}
+{"value1":"mote 4 has had mote 7 too near for 20 messages!"}
+{"value1":"mote 3 has had mote 7 too near for 20 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 7 has had mote 3 too near for 20 messages!"}
+{"value1":"mote 8 has had mote 3 too near for 20 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 9 has had mote 10 too near for 70 messages!"}
+{"value1":"mote 1 has had mote 2 too near for 80 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 2 has had mote 1 too near for 80 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 10 has had mote 5 too near for 10 messages!"}
+{"value1":"mote 5 has had mote 10 too near for 10 messages!"}
+{"value1":"mote 6 has had mote 5 too near for 60 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 5 has had mote 6 too near for 60 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 3 has had mote 4 too near for 80 messages!"}
+{"value1":"mote 4 has had mote 3 too near for 80 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 10 has had mote 6 too near for 10 messages!"}
+{"value1":"mote 6 has had mote 10 too near for 10 messages!"}
+{"value1":"mote 7 has had mote 8 too near for 70 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 5 has had mote 9 too near for 10 messages!"}
+{"value1":"mote 9 has had mote 5 too near for 10 messages!"}
+{"value1":"mote 8 has had mote 7 too near for 70 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 3 has had mote 8 too near for 30 messages!"}
+{"value1":"mote 4 has had mote 8 too near for 30 messages!"}
+{"value1":"mote 10 has had mote 9 too near for 80 messages!"}
+{"value1":"mote 7 has had mote 4 too near for 30 messages!"}
+{"value1":"mote 8 has had mote 4 too near for 30 messages!"}
+{"value1":"mote 3 has had mote 7 too near for 30 messages!"}
+{"value1":"mote 4 has had mote 7 too near for 30 messages!"}
+{"value1":"mote 7 has had mote 3 too near for 30 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 8 has had mote 3 too near for 30 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 9 has had mote 10 too near for 80 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 1 has had mote 2 too near for 90 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 2 has had mote 1 too near for 90 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 10 has had mote 5 too near for 20 messages!"}
+{"value1":"mote 5 has had mote 10 too near for 20 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 6 has had mote 5 too near for 70 messages!"}
+{"value1":"mote 5 has had mote 6 too near for 70 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 3 has had mote 4 too near for 90 messages!"}
+{"value1":"mote 4 has had mote 3 too near for 90 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 10 has had mote 6 too near for 20 messages!"}
+{"value1":"mote 6 has had mote 10 too near for 20 messages!"}
+{"value1":"mote 7 has had mote 8 too near for 80 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 8 has had mote 7 too near for 80 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 3 has had mote 8 too near for 40 messages!"}
+{"value1":"mote 4 has had mote 8 too near for 40 messages!"}
+{"value1":"mote 10 has had mote 9 too near for 90 messages!"}
+{"value1":"mote 8 has had mote 4 too near for 40 messages!"}
+{"value1":"mote 7 has had mote 4 too near for 40 messages!"}
+{"value1":"mote 4 has had mote 7 too near for 40 messages!"}
+{"value1":"mote 3 has had mote 7 too near for 40 messages!"}
+{"value1":"mote 8 has had mote 3 too near for 40 messages!"}
+{"value1":"mote 7 has had mote 3 too near for 40 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 9 has had mote 10 too near for 90 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 1 has had mote 2 too near for 100 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 2 has had mote 1 too near for 100 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 6 has had mote 5 too near for 80 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 3 has had mote 4 too near for 100 messages!"}
+{"value1":"mote 4 has had mote 3 too near for 100 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 10 has had mote 6 too near for 30 messages!"}
+{"value1":"mote 6 has had mote 10 too near for 30 messages!"}
+{"value1":"mote 7 has had mote 8 too near for 90 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 8 has had mote 7 too near for 90 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 9 has had mote 5 too near for 10 messages!"}
+{"value1":"mote 10 has had mote 5 too near for 10 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 3 has had mote 8 too near for 50 messages!"}
+{"value1":"mote 4 has had mote 8 too near for 50 messages!"}
+{"value1":"mote 10 has had mote 9 too near for 100 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 7 has had mote 4 too near for 50 messages!"}
+{"value1":"mote 8 has had mote 4 too near for 50 messages!"}
+{"value1":"mote 4 has had mote 7 too near for 50 messages!"}
+{"value1":"mote 3 has had mote 7 too near for 50 messages!"}
+{"value1":"mote 7 has had mote 3 too near for 50 messages!"}
+{"value1":"mote 8 has had mote 3 too near for 50 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 9 has had mote 10 too near for 100 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 5 has had mote 9 too near for 10 messages!"}
+{"value1":"mote 1 has had mote 2 too near for 110 messages!"}
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 5 has had mote 6 too near for 10 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 2 has had mote 1 too near for 110 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+{"value1":"mote 5 has had mote 10 too near for 10 messages!"}
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
+Congratulations! You've fired the alarm_received event
